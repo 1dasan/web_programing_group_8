@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자찾기 게임</title>
+
+
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: white;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        background: gray;
+        padding: 20px;
+        border-radius: 16px;
+        width: 450px;
+        box-shadow: 0 4px 20px black;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    #example {
+        width: 180px;
+        height: 50px;
+        margin: 10px auto;
+        display: block;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 10px;
+        border: 2px solid antiquewhite;
+        background: white;
+    }
+
+    #start, #finish {
+        width: 180px;
+        height: 50px;
+        margin: 10px auto;
+        display: block;
+        font-size: 24px;
+        text-align: center;
+        border-radius: 10px;
+        border: 2px solid black;
+        background: white;
+
+    }
+
+
+    button {
+        width: 55px;
+        height: 55px;
+        margin: 5px;
+        border-radius: 12px;
+        background-color: white;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .toggle-on {
+        background-color: skyblue;
+        color: black;
+    }
+
+    
+</style>
+
+<body>
+    <div class="container">
+    <div>
+        <div class="row">
+            <button id="start">start</button>
+            <button id="finish">Finish</button>
+        </div>
+        <p>제시된 숫자와 같은 숫자를 눌러주세요</p>
+        <div class="row">
+            <input readonly id="example">
+            <p id="result"></p>
+        </div>
+    </div>
+    <div class="row">
+        <button id="a-1"></button>
+        <button id="a-2"></button>
+        <button id="a-3"></button>
+        <button id="a-4"></button>
+        <button id="a-5"></button>
+        <button id="a-6"></button>
+    </div>
+    <div class="row">
+        <button id="b-1"></button>
+        <button id="b-2"></button>
+        <button id="b-3"></button>
+        <button id="b-4"></button>
+        <button id="b-5"></button>
+        <button id="b-6"></button>
+    </div>
+    <div class="row">
+        <button id="c-1"></button>
+        <button id="c-2"></button>
+        <button id="c-3"></button>
+        <button id="c-4"></button>
+        <button id="c-5"></button>
+        <button id="c-6"></button>
+    </div>
+    <div class="row">
+        <button id="d-1"></button>
+        <button id="d-2"></button>
+        <button id="d-3"></button>
+        <button id="d-4"></button>
+        <button id="d-5"></button>
+        <button id="d-6"></button>
+    </div>
+    </div>
+    <script>
+        const ids = [];
+        const rows = ["a", "b", "c", "d"];
+        const exa = document.getElementById("example");
+        let exaQuan = 0;
+        let toggledButtons = [];
+
+        function numplace() {
+            while (true) {
+                exaQuan = 0;
+                exa.value = Math.floor(Math.random() * 9) + 1;
+
+                rows.forEach(row => {
+                    for (let i = 1; i <= 6; i++) {
+                        const id = `${row}-${i}`;
+                        const btn = document.getElementById(id);
+                        const n = Math.floor(Math.random() * 9) + 1;
+                        btn.value = n;
+                        btn.innerText = n;
+
+                        if (n == exa.value) {
+                            exaQuan++;
+                        }
+                    }
+                });
+                if (exaQuan > 0) break;
+            }
+
+            console.log("정답 개수:", exaQuan);
+        };
+
+
+
+        const toggleBtn = (event) => {
+            event.target.classList.toggle("toggle-on");
+            toggledButtons = document.querySelectorAll(".toggle-on");
+            console.log(toggledButtons.length);
+        };
+
+        const checkBtn = () => {
+            const toggled = Array.from(toggledButtons);
+            const values = toggled.map(btn => btn.innerText);
+            const result = document.getElementById("result");
+            const target = exa.value;
+            if (values.length === 0) {
+                result.innerHTML = "버튼을 먼저 선택하세요!";
+                return;
+            }
+            if (toggled.length < exaQuan) {
+                result.innerHTML = "찾지 못한 수가 있습니다!";
+                return;
+            }
+            const allCorrect = toggled.every(btn => btn.innerText == target);
+            if (!allCorrect) {
+                result.innerHTML = "다른 수가 섞여 있습니다...";
+                return;
+            }
+            result.innerHTML = "성공! 축하합니다!";
+        };
+        document.querySelector("#start").addEventListener('click', numplace);
+        document.querySelector("#finish").addEventListener('click', checkBtn);
+
+        document.querySelector("#a-1").addEventListener('click', toggleBtn);
+        document.querySelector("#a-2").addEventListener('click', toggleBtn);
+        document.querySelector("#a-3").addEventListener('click', toggleBtn);
+        document.querySelector("#a-4").addEventListener('click', toggleBtn);
+        document.querySelector("#a-5").addEventListener('click', toggleBtn);
+        document.querySelector("#a-6").addEventListener('click', toggleBtn);
+
+        document.querySelector("#b-1").addEventListener('click', toggleBtn);
+        document.querySelector("#b-2").addEventListener('click', toggleBtn);
+        document.querySelector("#b-3").addEventListener('click', toggleBtn);
+        document.querySelector("#b-4").addEventListener('click', toggleBtn);
+        document.querySelector("#b-5").addEventListener('click', toggleBtn);
+        document.querySelector("#b-6").addEventListener('click', toggleBtn);
+
+        document.querySelector("#c-1").addEventListener('click', toggleBtn);
+        document.querySelector("#c-2").addEventListener('click', toggleBtn);
+        document.querySelector("#c-3").addEventListener('click', toggleBtn);
+        document.querySelector("#c-4").addEventListener('click', toggleBtn);
+        document.querySelector("#c-5").addEventListener('click', toggleBtn);
+        document.querySelector("#c-6").addEventListener('click', toggleBtn);
+
+        document.querySelector("#d-1").addEventListener('click', toggleBtn);
+        document.querySelector("#d-2").addEventListener('click', toggleBtn);
+        document.querySelector("#d-3").addEventListener('click', toggleBtn);
+        document.querySelector("#d-4").addEventListener('click', toggleBtn);
+        document.querySelector("#d-5").addEventListener('click', toggleBtn);
+        document.querySelector("#d-6").addEventListener('click', toggleBtn);
+    </script>
+</body>
+
+</html>

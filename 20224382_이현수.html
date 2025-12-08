@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2호선 정거장 수 맞추기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 4px;
+        }
+        input, button {
+            padding: 6px 8px;
+            font-size: 14px;
+        }
+        button {
+            margin-top: 16px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>2호선 정거장 수 맞추기</h1>
+    
+<a href="https://m.blog.naver.com/revolutio419/220403043040"> <img src= "https://mblogthumb-phinf.pstatic.net/20150627_252/revolutio419_1435376590087uJoWT_PNG/LINE_2.png?type=w2"
+    ></a>
+
+    <form id="subwayForm">
+        <label>출발역 입력</label>
+        <input type="text" id="startStation">
+
+        <label>도착역 입력</label>
+        <input type="text" id="endStation">
+
+        <label>정거장 수 입력</label>
+        <input type="number" id="userAnswer">
+
+        <button type="submit">제출</button>
+    </form>
+
+    <script>
+        var stationList = [
+            "시청","을지로입구","을지로3가","을지로4가","동대문역사문화공원",
+            "신당","상왕십리","왕십리","한양대","뚝섬","성수","건대입구","구의","강변",
+            "잠실나루","잠실","잠실새내","종합운동장","삼성","선릉","역삼","강남","교대",
+            "서초","방배","사당","낙성대","서울대입구","봉천","신림","신대방",
+            "구로디지털단지","대림","신도림","문래","영등포구청","당산","합정","홍대입구",
+            "신촌","이대","아현","충정로"
+        ];
+
+        function getIndex(name) {
+            for (var i = 0; i < stationList.length; i++) {
+                if (stationList[i] === name) return i;
+            }
+            return -1;
+        }
+
+        document.getElementById("subwayForm").onsubmit = function(e) {
+            e.preventDefault();
+
+            var startStation = document.getElementById("startStation").value.trim();
+            var endStation = document.getElementById("endStation").value.trim();
+            var userAnswer = Number(document.getElementById("userAnswer").value);
+
+            if (startStation === "" || endStation === "") {
+                alert("역 이름을 입력하세요.");
+                return;
+            }
+
+            var startIndex = getIndex(startStation);
+            var endIndex = getIndex(endStation);
+
+            if (startIndex === -1) {
+                alert("출발역이 존재하지 않습니다.");
+                return;
+            }
+            if (endIndex === -1) {
+                alert("도착역이 존재하지 않습니다.");
+                return;
+            }
+            if (startStation === endStation) {
+                alert("출발역과 도착역이 같습니다.");
+                return;
+            }
+
+            var total = stationList.length;
+            var realAnswer = (endIndex - startIndex + total) % total;
+
+            if (userAnswer === realAnswer) {
+                alert("정답입니다!");
+            } else {
+                alert("오답입니다. 시계방향(내선) 기준 실제 정거장 수는 " + realAnswer + "개 입니다.");
+            }
+        };
+    </script>
+
+</body>
+</html>

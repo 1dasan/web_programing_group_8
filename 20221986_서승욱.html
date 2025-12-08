@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>실행능력 언어 기억력 훈련</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 80px);
+            grid-template-rows: repeat(5, 80px);
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .cell {
+            width: 80px;
+            height: 80px;
+            background: #ffeaa7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        .question-box {
+            width: 500px;
+            padding: 15px;
+            background: #dfe6e9;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>실행능력 언어 기억력 훈련</h2>
+    <div> ↑ 뒤쪽 </div>
+    <div class="grid">
+        <div class="cell">♥</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell">🍺</div>
+        <div class="cell"></div>
+
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell">🐶</div>
+        <div class="cell"></div>
+        <div class="cell">🐦</div>
+
+        <div class="cell">🎨</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+
+        <div class="cell"></div>
+        <div class="cell">👨</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+
+        <div class="cell">⚽</div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell">📖</div>
+        <div class="cell"></div>
+    </div>
+    <div> ↓ 앞쪽 </div>
+
+    <div class="question-box">
+        <h3>Q1. 새가 강아지를 만나려면 어떻게 해야 할까?</h3>
+        <p>새가 왼쪽으로 <input id='q1-a' size='3'> 칸, 뒤로 <input id='q1-b' size='3'> 칸 가면 강아지를 만납니다.</p>
+    </div>
+
+    <div class="question-box">
+        <h3>Q2. 그림에 있는 남자가 술잔을 가지려면 어떻게 해야 할까?</h3>
+        <p>남자가 뒤로 <input id='q2-a' size='3'> 칸, 오른쪽으로 <input id='q2-b' size='3'> 칸 가면 술잔을 가질 수 있습니다.</p>
+    </div>
+
+    <div class="question-box">
+        <h3>Q3. 그림에 있는 하트가 책이 있는곳으로 가려면 어떻게 해야 할까?</h3>
+        <p>하트가 앞으로 <input id='q3-a' size='3'> 칸, 오른쪽으로 <input id='q3-b' size='3'> 칸 가면 술잔을 가질 수 있습니다.</p>
+    </div>
+
+    <div class="question-box">
+        <h3>Q4. 그림에 있는 팔레트가  새가 있는곳으로 가려면 어떻게 해야 할까?</h3>
+        <p>팔레트가 뒤로 <input id='q4-a' size='3'> 칸, 오른쪽으로 <input id='q4-b' size='3'> 칸 가면 술잔을 가질 수 있습니다.</p>
+    </div>
+
+    <div class="question-box">
+        <h3>Q5. 그림에 있는 남자가 공을 찾으러 가려면 어떻게 해야 할까?</h3>
+        <p>남자가 앞으로 <input id='q5-a' size='3'> 칸, 왼쪽으로 <input id='q5-b' size='3'> 칸 가면 술잔을 가질 수 있습니다.</p>
+    </div>
+
+
+    <button onclick='checkAnswers()'>정답 확인</button>
+
+    <script>
+        function checkAnswers() {
+            const q1a = document.getElementById('q1-a').value.trim();
+            const q1b = document.getElementById('q1-b').value.trim();
+            const q2a = document.getElementById('q2-a').value.trim();
+            const q2b = document.getElementById('q2-b').value.trim();
+            const q3a = document.getElementById('q3-a').value.trim();
+            const q3b = document.getElementById('q3-b').value.trim();
+            const q4a = document.getElementById('q4-a').value.trim();
+            const q4b = document.getElementById('q4-b').value.trim();
+            const q5a = document.getElementById('q5-a').value.trim();
+            const q5b = document.getElementById('q5-b').value.trim();
+            
+
+            let isCorrect = true;
+
+            if (!(q1a === '2' && q1b === '0')) isCorrect = false;
+            if (!(q2a === '3' && q2b === '2')) isCorrect = false;
+            if (!(q3a === '4' && q3b === '3')) isCorrect = false;
+            if (!(q4a === '1' && q4b === '4')) isCorrect = false;
+            if (!(q5a === '1' && q5b === '1')) isCorrect = false;
+
+            if (isCorrect) alert('정답입니다!');
+            else alert('오답입니다. 다시 시도해보세요!');
+        }
+    </script>
+</body>
+</html>
