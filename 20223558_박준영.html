@@ -37,28 +37,12 @@
     <button id="b19">19</button>
     <button id="b20">20</button>
     <script>
-        const buttons = [
-            $b1 = document.querySelector('#b1'),
-            $b2 = document.querySelector('#b2'),
-            $b3 = document.querySelector('#b3'),
-            $b4 = document.querySelector('#b4'),
-            $b5 = document.querySelector('#b5'),
-            $b6 = document.querySelector('#b6'),
-            $b7 = document.querySelector('#b7'),
-            $b8 = document.querySelector('#b8'),
-            $b9 = document.querySelector('#b9'),
-            $b10 = document.querySelector('#b10'),
-            $b11 = document.querySelector('#b11'),
-            $b12 = document.querySelector('#b12'),
-            $b13 = document.querySelector('#b13'),
-            $b14 = document.querySelector('#b14'),
-            $b15 = document.querySelector('#b15'),
-            $b16 = document.querySelector('#b16'),
-            $b17 = document.querySelector('#b17'),
-            $b18 = document.querySelector('#b18'),
-            $b19 = document.querySelector('#b19'),
-            $b20 = document.querySelector('#b20'),
-        ];
+        const buttons = [];
+
+        for (let i = 1; i <= 20; i++) 
+        {
+            buttons.push(document.querySelector(`#b${i}`));
+        }
         
         let click = 0;
         let first;
@@ -102,8 +86,6 @@
             {
                 buttons[i].textContent = quest[i];
             }
-            //console.log(quest);
-            //console.log(answer);
         };
 
         const isSorted = () => {
@@ -162,91 +144,15 @@
             last = i;
             swap(1);
         }
-        //console.log(answer);
 
         printButton();
 
-        const b1click = () => {
-            buttonClick(0);
-        };
-        const b2click = () => {
-            buttonClick(1);
-        };
-        const b3click = () => {
-            buttonClick(2);
-        };
-        const b4click = () => {
-            buttonClick(3);
-        };
-        const b5click = () => {
-            buttonClick(4);
-        };
-        const b6click = () => {
-            buttonClick(5);
-        };
-        const b7click = () => {
-            buttonClick(6);
-        };
-        const b8click = () => {
-            buttonClick(7);
-        };
-        const b9click = () => {
-            buttonClick(8);
-        };
-        const b10click = () => {
-            buttonClick(9);
-        };
-        const b11click = () => {
-            buttonClick(10);
-        };
-        const b12click = () => {
-            buttonClick(11);
-        };
-        const b13click = () => {
-            buttonClick(12);
-        };
-        const b14click = () => {
-            buttonClick(13);
-        };
-        const b15click = () => {
-            buttonClick(14);
-        };
-        const b16click = () => {
-            buttonClick(15);
-        };
-        const b17click = () => {
-            buttonClick(16);
-        };
-        const b18click = () => {
-            buttonClick(17);
-        };
-        const b19click = () => {
-            buttonClick(18);
-        };
-        const b20click = () => {
-            buttonClick(19);
-        };
-
-        $b1.addEventListener('click', b1click);
-        $b2.addEventListener('click', b2click);
-        $b3.addEventListener('click', b3click);
-        $b4.addEventListener('click', b4click);
-        $b5.addEventListener('click', b5click);
-        $b6.addEventListener('click', b6click);
-        $b7.addEventListener('click', b7click);
-        $b8.addEventListener('click', b8click);
-        $b9.addEventListener('click', b9click);
-        $b10.addEventListener('click', b10click);
-        $b11.addEventListener('click', b11click);
-        $b12.addEventListener('click', b12click);
-        $b13.addEventListener('click', b13click);
-        $b14.addEventListener('click', b14click);
-        $b15.addEventListener('click', b15click);
-        $b16.addEventListener('click', b16click);
-        $b17.addEventListener('click', b17click);
-        $b18.addEventListener('click', b18click);
-        $b19.addEventListener('click', b19click);
-        $b20.addEventListener('click', b20click);
+        for (let i = 0; i < 20; i++) 
+        {
+            buttons[i].addEventListener('click', () => {
+                buttonClick(i);
+            });
+        }
     </script>
 </body>
 </html>
