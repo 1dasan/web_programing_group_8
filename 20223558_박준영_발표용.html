@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20223558_박준영</title>
+    <style>
+        button 
+        {
+            width: 60px;      
+            height: 60px;     
+            font-size: 24px;  
+            margin: 5px;      
+        }
+    </style>
+</head>
+<body>
+    <div>오름차순으로 정렬하시오 </div>
+    <button id="b1">1</button>
+    <button id="b2">2</button>
+    <button id="b3">3</button>
+    <button id="b4">4</button>
+    <button id="b5">5</button>
+    <button id="b6">6</button>
+    <button id="b7">7</button>
+    <button id="b8">8</button>
+    <button id="b9">9</button>
+    <button id="b10">10</button>
+    <script>
+        const buttons = [];
+
+        for (let i = 1; i <= 10; i++) 
+        {
+            buttons.push(document.querySelector(`#b${i}`));
+        }
+        
+        let click = 0;
+        let first;
+        let last;
+
+        const buttonClick = (select) => {
+            if (click === 0)
+            {
+                buttons[select].disabled = true;
+                click = 1;
+                first = select;
+            }
+            else
+            {
+                last = select;
+                swap(2);
+                printButton();
+                buttons[first].disabled = false;
+                click = 0;
+                isSorted();
+            }
+        };
+
+        const swap = (kind) => {
+            if (kind === 1)
+            {
+                let temp = answer[first];
+                answer[first] = answer[last];
+                answer[last] = temp;
+            }
+            else
+            {
+                let temp = quest[first];
+                quest[first] = quest[last];
+                quest[last] = temp;
+            }
+        };
+
+        const printButton = () => {
+             for(let i = 0; i < 10; i++)
+            {
+                buttons[i].textContent = quest[i];
+            }
+        };
+
+        const isSorted = () => {
+            let finish = 1;
+            for (let i = 0; i < 10; i++)
+            {
+                if (quest[i] !== answer[i])
+                {
+                    finish = 0;
+                }
+            }
+            if (finish === 1)
+            {
+                alert("정렬이 완료되었습니다.");
+                for(let i = 0; i < 10; i++)
+                {
+                    buttons[i].disabled = true;
+                }
+            }
+        };
+
+        const number = [];
+        for(let i = 1; i <= 99; i++)
+        {
+            number.push(i);
+        }
+
+        const quest = [];
+        const answer = [];
+
+        for(let i = 0; i < 10; i++)
+        {
+            const index = Math.floor(Math.random() * number.length);
+            quest.push(number[index]);
+            number.splice(index, 1);
+        }
+        for(let i = 0; i < 10; i++)
+        {
+            answer[i] = quest[i];
+        }
+
+        for(let i = 9; i > 0; i--)
+        {
+            let maxarr = 0;
+            let max = 0;
+
+            for(let j = 0; j <= i; j++)
+            {
+                if (answer[j] > max)
+                {
+                    max = answer[j];
+                    maxarr = j;
+                }
+            }
+            first = maxarr;
+            last = i;
+            swap(1);
+        }
+
+        printButton();
+
+        for (let i = 0; i < 10; i++) 
+        {
+            buttons[i].addEventListener('click', () => {
+                buttonClick(i);
+            });
+        }
+    </script>
+</body>
+</html>
