@@ -131,10 +131,14 @@
         const ids = [];
         const rows = ["a", "b", "c", "d"];
         const exa = document.getElementById("example");
+        const result = document.getElementById("result");
         let exaQuan = 0;
         let toggledButtons = [];
 
         function numplace() {
+            exa.value="";
+            result.innerHTML = "";
+
             while (true) {
                 exaQuan = 0;
                 exa.value = Math.floor(Math.random() * 9) + 1;
@@ -169,7 +173,7 @@
         const checkBtn = () => {
             const toggled = Array.from(toggledButtons);
             const values = toggled.map(btn => btn.innerText);
-            const result = document.getElementById("result");
+           
             const target = exa.value;
             if (values.length === 0) {
                 result.innerHTML = "버튼을 먼저 선택하세요!";
@@ -185,6 +189,7 @@
                 return;
             }
             result.innerHTML = "성공! 축하합니다!";
+           
         };
         document.querySelector("#start").addEventListener('click', numplace);
         document.querySelector("#finish").addEventListener('click', checkBtn);
